@@ -21,12 +21,23 @@ function handleRange(event) {
 function handleNumber(event) {
     event.preventDefault();
     const numberInputText = numberInput.value;
-    checkGamble(numberInputText);
+    if (numberInputText) {
+        checkGamble(numberInputText);
+    } else {
+        clearGamble();
+    }
 }
 
 function saveRangeInput(value) {
     saveNumber = value;
     displayH4.innerHTML = `Generate a number between 0 and ${value}`;
+}
+
+function clearGamble() {
+    const changedFirstLine = result.querySelector(".firstLine");
+    const changedSecondLine = result.querySelector(".secondLine");
+    changedFirstLine.innerHTML = "";
+    changedSecondLine.innerHTML = "";
 }
 
 function checkGamble(gambleNumber) {
