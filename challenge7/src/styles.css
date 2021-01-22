@@ -25,7 +25,7 @@ button {
 
 .number,
 .equal {
-    background-color: #363539;
+    background-color: #373439;
 }
 
 .operator {
@@ -46,7 +46,7 @@ button {
 
 .reset {
     width: 25%;
-    background-color: #a7aab0;
+    background-color: #a7aab1;
 }
 .number,
 .equal,
