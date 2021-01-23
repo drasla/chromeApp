@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Something</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Make the Chrome App</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/css/index.css">
+    <link rel="stylesheet" href="src/css/reset.css">
 </head>
 <body>
-<div class="js-clock">
-    <h1 class="js-title"></h1>
-</div>
-<form class="js-form form" >
-    <input type="text" placeholder="What your name?" />
-</form>
-<form class="js-toDoForm">
-    <input type="text" placeholder="Write a To-Do" />
-</form>
-<ul class="js-toDoList">
-</ul>
-<span class="js-weather"></span>
-<h4 class="js-greetings greetings"></h4>
-<script src="clock.js"></script>
-<script src="greeting.js"></script>
-<script src="toDo.js"></script>
-<script src="background.js"></script>
-<script src="weather.js"></script>
+<top>
+    <span class="js-weather"></span>
+</top>
+<main>
+    <div class="js-clock">
+        <h3 class="js-date"></h3>
+        <h1 class="js-time"></h1>
+    </div>
+    <h4 class="js-greetings greetings"></h4>
+    <form class="js-form form" >
+        <input type="text" placeholder="What your name?" />
+    </form>
+    <form class="js-toDoForm">
+        <input type="text" placeholder="Write a To-Do" />
+    </form>
+    <ul class="js-toDoList">
+    </ul>
+</main>
+
+
+<script src="src/js/clock.js"></script>
+<script src="src/js/greeting.js"></script>
+<script src="src/js/toDo.js"></script>
+<script src="src/js/background.js"></script>
+<script src="src/js/weather.js"></script>
 </body>
 </html>
