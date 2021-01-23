@@ -11,65 +11,86 @@ const operatorBtns = document.querySelectorAll(".operator");
 let number = "";
 let nextNumber = "";
 let operator = "";
+let prevOperator = "";
 let currentNumber = 0;
 let resultNumber = 0;
+let firstDone, secondDone;
 
 function handleReset() {
     number = "";
     nextNumber = "";
     currentNumber = 0;
     resultNumber = 0;
+    firstDone = false;
+    secondDone = false;
     operator = "";
+    prevOperator = "";
     result.innerText = resultNumber;
 }
 
-function handleOperator(event) {
-    const operatorValue = event.target.value;
-    number = "";
-    nextNumber = "";
-
-    switch (operator) {
-        case "":
-            operator = operatorValue;
+function calculate() {
+    switch (prevOperator) {
         case "+":
-            resultNumber = resultNumber + currentNumber;
-            operator = operatorValue;
+            console.log(currentNumber, resultNumber);
+            resultNumber = currentNumber + resultNumber;
             result.innerText = resultNumber;
             break;
         case "-":
-            resultNumber = resultNumber - currentNumber;
-            operator = operatorValue;
+            resultNumber = currentNumber - resultNumber;
             result.innerText = resultNumber;
             break;
         case "*":
-            resultNumber = resultNumber * currentNumber;
-            operator = operatorValue;
+            resultNumber = currentNumber * resultNumber;
             result.innerText = resultNumber;
             break;
         case "/":
-            resultNumber = resultNumber / currentNumber;
-            operator = operatorValue;
+            resultNumber = currentNumber / resultNumber;
             result.innerText = resultNumber;
             break;
-        case "=":
-            number = "";
-            nextNumber = "";
-            operator = operatorValue;
-            break;
+        default:
+            return;
     }
+    currentNumber = resultNumber;
+}
+
+function handleOperator(event) {
+    operator = event.target.value;
+    number = "";
+    nextNumber = "";
+
+    if(!firstDone) {
+        firstDone = true;
+    }
+
+    if(firstDone && secondDone) {
+        calculate();
+    }
+
+    secondDone = false;
+    prevOperator = operator;
 }
 
 function printNumber(event) {
-    if(operator === "=") {
-        resultNumber = 0;
-    }
-
-    const numberBtn = event.target;
-    const numberValue = numberBtn.value;
+    const numberValue = event.target.value;
     nextNumber = `${numberValue}`;
-    number = `${number}${nextNumber}`;
-    currentNumber = parseInt(number);
-    result.innerText = currentNumber;
+    if(!firstDone) {
+        number = `${number}${nextNumber}`;
+        currentNumber = parseInt(number);
+        result.innerText = currentNumber;
+    } else {
+        number = `${number}${nextNumber}`;
+        resultNumber = parseInt(number);
+        result.innerText = resultNumber;
+        secondDone = true;
+    }
+}
+
+function handleEquel() {
+    if (firstDone && secondDone) {
+        calculate();
+        operator = "";
+        prevOperator = "";
+    }
 }
 
 function init() {
@@ -80,7 +101,7 @@ function init() {
         operatorBtn.addEventListener("click", handleOperator);
     });
     reset.addEventListener("click", handleReset);
-    equel.addEventListener("click", handleOperator);
+    equel.addEventListener("click", handleEquel);
 }
 
 init();
